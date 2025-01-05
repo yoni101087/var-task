@@ -43,7 +43,7 @@ resource "azurerm_linux_function_app" "example" {
 
   storage_account_name       = azurerm_storage_account.example.name
   storage_account_access_key = azurerm_storage_account.example.primary_access_key
-  service_plan_id            = azurerm_service_plan.example.id
+  service_plan_id            = azurerm_app_service_plan.example.id
   #app_settings = {
   #  "FUNCTIONS_WORKER_RUNTIME" = "python" # Change according to your function's runtime
   #  "APPLICATIONINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.example.instrumentation_key
