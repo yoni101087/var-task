@@ -65,7 +65,7 @@ resource "azurerm_function_app" "functionapp" {
 
   app_settings = {
     "FUNCTIONS_WORKER_RUNTIME" = "python" # Change according to your function's runtime
-    "APPLICATIONINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.example.instrumentation_key
+    "APPLICATIONINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.appinsight.instrumentation_key
     "AzureWebJobsStorage" = azurerm_storage_account.storageaccount.primary_connection_string
   }
 }
