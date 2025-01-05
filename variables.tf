@@ -7,7 +7,7 @@ variable "resource_group_name" {
 variable "location" {
   description = "The Azure region to deploy the resources."
   type        = string
-  default     = "East US"
+  default     = "West Europe"
 }
 
 variable "function_app_name" {
