@@ -19,7 +19,7 @@ variable "function_app_name" {
 variable "storage_account_name" {
   description = "The name of the Azure Storage Account."
   type        = string
-  default     = "storageccount1"
+  default     = "storageccount1111"
 }
 
 variable "app_insights_name" {
