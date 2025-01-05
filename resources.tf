@@ -38,34 +38,34 @@ resource "azurerm_application_insights" "appinsight" {
 #}
 
 
-resource "azurerm_linux_function_app" "example" {
-  name                = "example-linux-function-app"
+#resource "azurerm_linux_function_app" "example" {
+#  name                = "example-linux-function-app"
+#  resource_group_name = azurerm_resource_group.rg.name
+#  location            = azurerm_resource_group.rg.location
+#  storage_account_name       = azurerm_storage_account.storageaccount.name
+#  storage_account_access_key = azurerm_storage_account.storageaccount.primary_access_key
+#  service_plan_id            = azurerm_service_plan.serviceplan.id
+#  #app_settings = {
+#  #  "FUNCTIONS_WORKER_RUNTIME" = "python" # Change according to your function's runtime
+#  #  "APPLICATIONINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.example.instrumentation_key
+#  #  "AzureWebJobsStorage" = azurerm_storage_account.example.primary_connection_string
+#  #}
+#  site_config {}
+#}
+
+resource "azurerm_function_app" "functionapp" {
+  name                       = var.function_app_name
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
+  app_service_plan_id        = azurerm_service_plan.serviceplan.id
   storage_account_name       = azurerm_storage_account.storageaccount.name
-  storage_account_access_key = azurerm_storage_account.storageaccount.primary_access_key
-  service_plan_id            = azurerm_service_plan.serviceplan.id
-  #app_settings = {
-  #  "FUNCTIONS_WORKER_RUNTIME" = "python" # Change according to your function's runtime
-  #  "APPLICATIONINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.example.instrumentation_key
-  #  "AzureWebJobsStorage" = azurerm_storage_account.example.primary_connection_string
-  #}
-  site_config {}
-}
+  storage_account_access_key  = azurerm_storage_account.storageaccount.primary_access_key
+  version                    = "~3" # or "~4" for .NET 5
+  os_type                    = "linux"
 
-#resource "azurerm_function_app" "example" {
-#  name                       = var.function_app_name
-#  resource_group_name        = azurerm_resource_group.example.name
-#  location                   = azurerm_resource_group.example.location
-#  app_service_plan_id        = azurerm_app_service_plan.example.id
-#  storage_account_name       = azurerm_storage_account.example.name
-#  storage_account_access_key  = azurerm_storage_account.example.primary_access_key
-#  version                    = "~3" # or "~4" for .NET 5
-#  os_type                    = "linux"
-#
-#  app_settings = {
-#    "FUNCTIONS_WORKER_RUNTIME" = "python" # Change according to your function's runtime
-#    "APPLICATIONINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.example.instrumentation_key
-#    "AzureWebJobsStorage" = azurerm_storage_account.example.primary_connection_string
-#  }
-#}
+  app_settings = {
+    "FUNCTIONS_WORKER_RUNTIME" = "python" # Change according to your function's runtime
+    "APPLICATIONINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.example.instrumentation_key
+    "AzureWebJobsStorage" = azurerm_storage_account.storageaccount.primary_connection_string
+  }
+}
