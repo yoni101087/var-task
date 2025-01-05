@@ -11,14 +11,12 @@ resource "azurerm_storage_account" "example" {
   account_replication_type = "LRS"
 }
 
-resource "azurerm_app_service_plan" "example" {
-  name                = "example-appservice-plan"
-  location            = azurerm_resource_group.example.location
+resource "azurerm_service_plan" "example" {
+  name                = "example"
   resource_group_name = azurerm_resource_group.example.name
-  sku {
-    tier     = "Dynamic"
-    size     = "I1" # The size for a Consumption plan
-  }
+  location            = azurerm_resource_group.example.location
+  os_type             = "Linux"
+  sku_name            = "P1v2"
 }
 
 resource "azurerm_application_insights" "example" {
