@@ -49,7 +49,7 @@ resource "azurerm_linux_function_app" "example" {
     "APPLICATIONINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.example.instrumentation_key
     "AzureWebJobsStorage" = azurerm_storage_account.example.primary_connection_string
   }
-  site_config {}
+  #site_config {}
 }
 
 #resource "azurerm_function_app" "example" {
