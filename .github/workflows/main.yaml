@@ -6,8 +6,15 @@ on:
       - main  # Change to your preferred branch
 
 jobs:
-  deploy:
+  terraform:
+    name: 'Terraform'
     runs-on: ubuntu-latest
+    env:
+      ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
+      ARM_TENANT_ID: ${{ secrets.AZURE_TENANTID }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTIONID }}
+
 
     steps:
     - name: Checkout code
@@ -44,16 +51,16 @@ jobs:
 
     - name: Terraform Plan
       run: terraform plan
-      env:
-        ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-        ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-        ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      #env:
+      #  ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      #  ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+      #  ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      #  ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
 
     - name: Terraform Apply
       run: terraform apply -auto-approve
-      env:
-        ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-        ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-        ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      #env:
+      #  ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      #  ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+      #  ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      #  ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
