@@ -35,9 +35,9 @@ jobs:
           ${{ runner.os }}-python-
 
     - name: Install Terraform
-      uses: hashicorp/setup-terraform@v1
+      uses: hashicorp/setup-terraform@v3
       with:
-        terraform_version: 1.0.0  # Specify the Terraform version
+        terraform_version: "1.1.7"  # Specify the Terraform version
 
     - name: Terraform Init
       run: terraform init
