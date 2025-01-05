@@ -1,7 +1,7 @@
 variable "resource_group_name" {
   description = "The name of the resource group for all resources."
   type        = string
-  default     = "example-resources"
+  default     = "jonathan-rg"
 }
 
 variable "location" {
@@ -13,17 +13,17 @@ variable "location" {
 variable "function_app_name" {
   description = "The name of the Azure Function App."
   type        = string
-  default     = "examplefunctionapp"
+  default     = "functionapp"
 }
 
 variable "storage_account_name" {
   description = "The name of the Azure Storage Account."
   type        = string
-  default     = "examplestoraccoun"
+  default     = "storageccount1"
 }
 
 variable "app_insights_name" {
   description = "The name of the Azure Application Insights."
   type        = string
-  default     = "exampleappinsights"
+  default     = "appinsights"
 }
