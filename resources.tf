@@ -36,23 +36,20 @@ resource "azurerm_app_service_plan" "example" {
   }
 }
 
-resource "azurerm_function_app" "example" {
-  name                       = "example-azure-function"
-  location                   = azurerm_resource_group.example.location
-  resource_group_name        = azurerm_resource_group.example.name
-  app_service_plan_id        = azurerm_app_service_plan.example.id
+resource "azurerm_linux_function_app" "example" {
+  name                = "example-linux-function-app"
+  resource_group_name = azurerm_resource_group.example.name
+  location            = azurerm_resource_group.example.location
+
   storage_account_name       = azurerm_storage_account.example.name
   storage_account_access_key = azurerm_storage_account.example.primary_access_key
-  os_type                    = "linux"
-  version                    = "~4"
-
-  app_settings {
-    FUNCTIONS_WORKER_RUNTIME = "python"
+  service_plan_id            = azurerm_service_plan.example.id
+  app_settings = {
+    "FUNCTIONS_WORKER_RUNTIME" = "python" # Change according to your function's runtime
+    "APPLICATIONINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.example.instrumentation_key
+    "AzureWebJobsStorage" = azurerm_storage_account.example.primary_connection_string
   }
-
-  site_config {
-    linux_fx_version = "python|3.10"
-  }
+  site_config {}
 }
 
 #resource "azurerm_function_app" "example" {
