@@ -23,9 +23,9 @@ jobs:
     - name: Log in to Azure
       uses: azure/login@v2
       with:
-        client-id: ${{ secrets.AZURE_CLIENT_ID }}
-        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        client-id: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
+        tenant-id: ${{ secrets.AZURE_TENANTID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTIONID }}
 
     - name: Azure CLI script
       uses: azure/cli@v2
@@ -66,16 +66,16 @@ jobs:
     - name: Terraform Plan
       run: terraform plan
       env:
-        ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-        ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-        ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-        TF_LOG: DEBUG
+        ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
+        ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
+        ARM_TENANT_ID: ${{ secrets.AZURE_TENANTID }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTIONID }}
+
 
     - name: Terraform Apply
       run: terraform apply -auto-approve
       env:
-        ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-        ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-        ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+        ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
+        ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
+        ARM_TENANT_ID: ${{ secrets.AZURE_TENANTID }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTIONID }}
