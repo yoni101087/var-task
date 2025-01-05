@@ -1,0 +1,9 @@
+Flask
+azure-identity
+flask_sqlalchemy
+azure-keyvault-secrets
+sqlalchemy
+azure-storage-blob
+azure-mgmt-resource
+flask_swagger_ui
+pyodbc
