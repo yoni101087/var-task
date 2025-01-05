@@ -6,11 +6,5 @@ terraform {
     }
   }
 
-  backend "azurerm" {
-    resource_group_name   = "jonathanfeTF"
-    storage_account_name = "jonathanfecicd"
-    container_name       = "jonathanfecicd"
-    key                  = "terraform.tfstate"
-  }
 
 }
