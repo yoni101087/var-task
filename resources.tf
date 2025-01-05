@@ -25,15 +25,24 @@ resource "azurerm_application_insights" "example" {
   resource_group_name = azurerm_resource_group.example.name
   application_type    = "web"
 }
-resource "azurerm_app_service_plan" "example" {
-  name                = "azure-functions-test-service-plan"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
 
-  sku {
-    tier = "Standard"
-    size = "S1"
-  }
+#resource "azurerm_app_service_plan" "example" {
+#  name                = "azure-functions-test-service-plan"
+#  location            = azurerm_resource_group.example.location
+#  resource_group_name = azurerm_resource_group.example.name
+#
+#  sku {
+#    tier = "Standard"
+#    size = "S1"
+#  }
+#}
+
+resource "azurerm_service_plan" "example" {
+  name                = "example"
+  resource_group_name = azurerm_resource_group.example.name
+  location            = azurerm_resource_group.example.location
+  os_type             = "Linux"
+  sku_name            = "P1v2"
 }
 
 resource "azurerm_linux_function_app" "example" {
