@@ -1,7 +1,7 @@
 variable "resource_group_name" {
   description = "The name of the resource group for all resources."
   type        = string
-  default     = "jonathan-rg"
+  default     = "jonathan1-rg"
 }
 
 variable "location" {
