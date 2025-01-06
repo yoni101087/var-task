@@ -47,8 +47,8 @@ resource "azurerm_linux_function_app" "functionapp" {
   service_plan_id            = azurerm_service_plan.serviceplan.id
   app_settings = {
     "FUNCTIONS_WORKER_RUNTIME" = "python" # Change according to your function's runtime
-    "APPLICATIONINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.example.instrumentation_key
-    "AzureWebJobsStorage" = azurerm_storage_account.example.primary_connection_string
+    "APPLICATIONINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.appinsight.instrumentation_key
+    "AzureWebJobsStorage" = azurerm_storage_account.storageaccount.primary_connection_string
   }
   site_config {}
 }
