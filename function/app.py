@@ -1,4 +1,5 @@
 import json
+import os
 from datetime import datetime
 from typing import List, Optional
 from flask import Flask, jsonify, request
@@ -87,6 +88,9 @@ swaggerui_blueprint = get_swaggerui_blueprint(
     }
 )
 app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
+
+# Explicitly set static folder for Azure compatibility
+app._static_folder = os.path.abspath('./static')
 
 @app.route("/swagger.json", methods=["GET"])
 def swagger_spec():
