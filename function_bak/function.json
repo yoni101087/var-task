@@ -1,0 +1,87 @@
+{
+    "bindings": [
+      {
+        "type": "httpTrigger",
+        "direction": "in",
+        "authLevel": "function",
+        "methods": ["get", "post"],
+        "route": null
+      },
+      {
+        "type": "http",
+        "direction": "out"
+      }
+    ],
+    "restaurantData": [
+      {
+        "name": "Pasta Bella",
+        "address": "123 Italy Lane, Romeville",
+        "style": "Italian",
+        "vegetarian": false,
+        "openHour": "10:00",
+        "closeHour": "23:00",
+        "deliveries": true,
+        "stars": 4.5
+      },
+      {
+        "name": "Le Petit Bistro",
+        "address": "50 Rue de Paris, Parisville",
+        "style": "French",
+        "vegetarian": true,
+        "openHour": "07:00",
+        "closeHour": "22:00",
+        "deliveries": false,
+        "stars": 4.7
+      },
+      {
+        "name": "Seoul Garden",
+        "address": "88 Seoul Street, K-Town",
+        "style": "Korean",
+        "vegetarian": true,
+        "openHour": "11:00",
+        "closeHour": "22:00",
+        "deliveries": true,
+        "stars": 4.3
+      },
+      {
+        "name": "Baguette & Co.",
+        "address": "45 Champs-Élysées, Paris",
+        "style": "French",
+        "vegetarian": false,
+        "openHour": "08:00",
+        "closeHour": "21:00",
+        "deliveries": true,
+        "stars": 4.2
+      },
+      {
+        "name": "Kimchi Palace",
+        "address": "101 K-BBQ Street, Seoulburg",
+        "style": "Korean",
+        "vegetarian": false,
+        "openHour": "09:00",
+        "closeHour": "23:30",
+        "deliveries": true,
+        "stars": 4.6
+      },
+      {
+        "name": "Vegano's Delight",
+        "address": "120 Veggie Blvd, GreenCity",
+        "style": "Italian",
+        "vegetarian": true,
+        "openHour": "08:30",
+        "closeHour": "21:00",
+        "deliveries": false,
+        "stars": 4.8
+      },
+      {
+        "name": "Bistro de Luxe",
+        "address": "72 Rue Montmartre, Paris",
+        "style": "French",
+        "vegetarian": false,
+        "openHour": "10:00",
+        "closeHour": "00:00",
+        "deliveries": true,
+        "stars": 4.9
+      }
+    ]
+  }
