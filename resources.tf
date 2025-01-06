@@ -39,7 +39,7 @@ resource "azurerm_application_insights" "appinsight" {
 
 
 resource "azurerm_linux_function_app" "functionapp" {
-  name                = "functionapp"
+  name                = "functionapp123"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
   storage_account_name       = azurerm_storage_account.storageaccount.name
