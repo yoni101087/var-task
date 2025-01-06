@@ -50,7 +50,13 @@ resource "azurerm_linux_function_app" "functionapp" {
     "APPLICATIONINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.appinsight.instrumentation_key
     "AzureWebJobsStorage" = azurerm_storage_account.storageaccount.primary_connection_string
   }
-  site_config {}
+  site_config {
+  application_stack {
+    python_version = "3.10" # Use the version matching your local app
+  }
+  app_command_line = "gunicorn --workers=1 --bind=0.0.0.0:5000 function_app:main"
+}
+
 }
 
 #resource "azurerm_function_app" "functionapp" { ### deprecated

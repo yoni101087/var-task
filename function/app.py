@@ -205,6 +205,5 @@ def all_restaurants():
     ]
     return jsonify({"restaurants": all_restaurants_data}), 200
 
-# Run the Flask app (this starts the web server)
-if __name__ == "__main__":
-    app.run(debug=True)
+# Run the Flask app as a WSGI application for Azure Functions
+main = app
