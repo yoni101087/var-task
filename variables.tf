@@ -1,29 +1,34 @@
 variable "resource_group_name" {
-  description = "The name of the resource group for all resources."
-  type        = string
-  default     = "jonathan2-rg"
+  type = string
+  default = "main"
 }
 
 variable "location" {
-  description = "The Azure region to deploy the resources."
-  type        = string
-  default     = "West Europe"
+  type    = string
+  default = "West Europe"
 }
 
-variable "function_app_name" {
-  description = "The name of the Azure Function App."
-  type        = string
-  default     = "functionapp1"
+
+variable "vnet" {
+  type = string 
+  default = "100.16.0.0/16"
 }
 
-variable "storage_account_name" {
-  description = "The name of the Azure Storage Account."
-  type        = string
-  default     = "storageccount1112"
+variable "subnet" {
+  type = string
+  default = "100.16.1.0/24" 
+  
 }
 
-variable "app_insights_name" {
-  description = "The name of the Azure Application Insights."
-  type        = string
-  default     = "appinsights1"
+
+
+variable "key_vault_name" {
+  description = "Name of the Azure Key Vault"
+  default = "keyvault-abc12345"
+}
+
+
+variable "prefix" {
+  type    = string
+  default = "jf12"
 }
