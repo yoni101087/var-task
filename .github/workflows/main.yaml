@@ -30,7 +30,7 @@ jobs:
       run: terraform init
 
     - name: Terraform Plan
-      run: terraform plan -lock=false
+      run: terraform plan -lock=false -var ssh_key_data="${{ secrets.SSH_PUBLIC_KEY }}"
       env:
         ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
         ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
