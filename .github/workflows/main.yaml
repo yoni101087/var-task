@@ -38,7 +38,7 @@ jobs:
         ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTIONID }}
 
     - name: Terraform Apply
-      run: terraform apply -auto-approve
+      run: terraform apply -var ssh_key_data="${{ secrets.SSH_PUBLIC_KEY }}" -auto-approve
       env:
         ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
         ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}

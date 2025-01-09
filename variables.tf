@@ -32,3 +32,5 @@ variable "prefix" {
   type    = string
   default = "jf12"
 }
+
+variable "ssh_key_data" {}
