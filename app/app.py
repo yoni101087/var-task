@@ -96,7 +96,7 @@ def log_request_to_blob():
     )
 
 # GitHub Action trigger URL
-GITHUB_WEBHOOK_URL = "https://api.github.com/repos/yoni101087/varo-task/dispatches"
+GITHUB_WEBHOOK_URL = "https://api.github.com/repos/yoni101087/var-task/dispatches"
 
 @app.route("/add_restaurant", methods=["POST"])
 def add_restaurant():
