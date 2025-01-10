@@ -40,8 +40,13 @@ jobs:
               sleep 5
             fi
           done
-          echo "App failed to start. Exiting."
+          echo "App failed to start. Showing container logs..."
+          docker logs my_app || true
+          echo "Removing the container..."
+          docker rm -f my_app || true
           exit 1
+        
+        
 
       - name: Push Docker image
         run: |
