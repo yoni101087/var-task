@@ -25,12 +25,16 @@ COSMOS_KEY = secret_client.get_secret("COSMOS-KEY").value
 DATABASE_NAME = secret_client.get_secret("COSMOS-DATABASE-NAME").value
 CONTAINER_NAME = secret_client.get_secret("COSMOS-CONTAINER-NAME").value
 
-# Fetch the Blob Container Name from Key Vault
+# Fetch the Storage Account Name from Key Vault
+STORAGE_ACCOUNT_NAME = secret_client.get_secret("STORAGE-ACCOUNT-NAME").value
 BLOB_CONTAINER_NAME = secret_client.get_secret("BLOB-CONTAINER-NAME").value
 
 # Use Managed Identity to authenticate with Azure Blob Storage
 managed_identity_credential = ManagedIdentityCredential()
-blob_service_client = BlobServiceClient(account_url=f"https://{BLOB_CONTAINER_NAME}.blob.core.windows.net", credential=managed_identity_credential)
+blob_service_client = BlobServiceClient(
+    account_url=f"https://{STORAGE_ACCOUNT_NAME}.blob.core.windows.net",
+    credential=managed_identity_credential
+)
 blob_container_client = blob_service_client.get_container_client(container=BLOB_CONTAINER_NAME)
 
 # ---------------- Restaurant Model ----------------
