@@ -55,6 +55,19 @@ jobs:
           exit 1
         
         
+      - name: Swagger endpoint and Get Public IP Address
+        if: success()  # This ensures the step runs only if the previous steps succeed
+        run: |
+          # Echo API details
+          echo "APIs..."
+          echo "POST /add_restaurant"
+          echo "GET /query_restaurant"
+          echo "GET /all_restaurants"
+          
+          # Get Public IP Address
+          echo "Getting Public IP Address..."
+          IP_ADDRESS=$(curl -s ifconfig.me)
+          echo "Public IP Address: $IP_ADDRESS"
 
       - name: Push Docker image
         run: |
