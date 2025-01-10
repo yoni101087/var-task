@@ -58,8 +58,9 @@ jobs:
       - name: Swagger endpoint and Get Public IP Address
         if: success()  # This ensures the step runs only if the previous steps succeed
         run: |
-          # Echo API details
-          echo "APIs..."
+          echo "Getting Public IP Address..."
+          IP_ADDRESS=$(curl -s ifconfig.me)
+          echo "Public IP Address: $IP_ADDRESS"
           echo "POST $IP_ADDRESS:5000/add_restaurant"
           echo "GET $IP_ADDRESS:5000/query_restaurant"
           echo "GET $IP_ADDRESS:5000/all_restaurants"
