@@ -28,7 +28,7 @@ CONTAINER_NAME = secret_client.get_secret("COSMOS-CONTAINER-NAME").value
 # Fetch the SAS URL for the Blob container from Key Vault
 BLOB_CONTAINER_SAS_URL = secret_client.get_secret("BLOB-SAS-URL").value
 BLOB_CONTAINER_NAME = secret_client.get_secret("BLOB-CONTAINER-NAME").value
-GITHUB_TOKEN = secret_client.get_secret("VARO").value
+GITHUB_TOKEN = secret_client.get_secret("GITHUB-TOKEN").value
 
 # Cosmos DB client (NoSQL / SQL API)
 cosmos_client = CosmosClient(url=COSMOS_URL, credential=COSMOS_KEY)
