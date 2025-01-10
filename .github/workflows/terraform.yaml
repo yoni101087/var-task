@@ -1,11 +1,7 @@
-name: Deploy Azure Function for any changes
+name: Deploy Azure Resources
 
 on:
-  push:
-    branches:
-      - main  # Change to your preferred branch
-  repository_dispatch:
-    types: [add_restaurant]
+  workflow_dispatch:
 
 jobs:
   deploy:
