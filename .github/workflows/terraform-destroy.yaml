@@ -29,7 +29,7 @@ jobs:
 
 
     - name: Terraform Destroy
-      run: terraform destroy -auto-approve
+      run: terraform destroy -var ssh_key_data="${{ secrets.SSH_PUBLIC_KEY }}" -auto-approve
       env:
         ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
         ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
