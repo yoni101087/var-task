@@ -19,12 +19,10 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ github.repository }}:${{ github.sha }} ./app
-          docker tag ${{ secrets.DOCKER_USERNAME }}/${{ github.repository }}:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/${{ github.repository }}:latest
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ github.repository }}:latest ./app
 
       - name: Push Docker image
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/${{ github.repository }}:${{ github.sha }}
           docker push ${{ secrets.DOCKER_USERNAME }}/${{ github.repository }}:latest
 
 
