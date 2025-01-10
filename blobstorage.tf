@@ -79,8 +79,8 @@ resource "azurerm_key_vault_secret" "storage_container_name_secret" {
 
 
 # Assign 'Storage Blob Data Contributor' role to the user-assigned identity # need to check
-#resource "azurerm_role_assignment" "blob_storage_access" {
-#  scope                = azurerm_storage_account.main.id
-#  role_definition_name = "Storage Blob Data Contributor"
-#  principal_id         = azurerm_user_assigned_identity.user.principal_id
-#}
+resource "azurerm_role_assignment" "blob_storage_access" {
+  scope                = azurerm_storage_account.sa.id
+  role_definition_name = "Storage Blob Data Contributor"
+  principal_id         = azurerm_user_assigned_identity.user.principal_id
+}
