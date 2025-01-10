@@ -9,10 +9,10 @@ from flask_swagger_ui import get_swaggerui_blueprint
 
 # ---------------- Azure Key Vault / Identity ----------------
 from azure.keyvault.secrets import SecretClient
-from azure.identity import DefaultAzureCredential, ManagedIdentityCredential
+from azure.identity import DefaultAzureCredential
 
 from azure.cosmos import CosmosClient, PartitionKey
-from azure.storage.blob import BlobServiceClient, ContentSettings
+from azure.storage.blob import ContainerClient, ContentSettings
 import requests
 
 # 1. Create Key Vault client
@@ -25,17 +25,21 @@ COSMOS_KEY = secret_client.get_secret("COSMOS-KEY").value
 DATABASE_NAME = secret_client.get_secret("COSMOS-DATABASE-NAME").value
 CONTAINER_NAME = secret_client.get_secret("COSMOS-CONTAINER-NAME").value
 
-# Fetch the Storage Account Name from Key Vault
-STORAGE_ACCOUNT_NAME = secret_client.get_secret("STORAGE-ACCOUNT-NAME").value
+# Fetch the SAS URL for the Blob container from Key Vault
+BLOB_CONTAINER_SAS_URL = secret_client.get_secret("BLOB-SAS-URL").value
 BLOB_CONTAINER_NAME = secret_client.get_secret("BLOB-CONTAINER-NAME").value
+GITHUB_TOKEN = secret_client.get_secret("GITHUB-TOKEN").value
 
-# Use Managed Identity to authenticate with Azure Blob Storage
-managed_identity_credential = ManagedIdentityCredential()
-blob_service_client = BlobServiceClient(
-    account_url=f"https://{STORAGE_ACCOUNT_NAME}.blob.core.windows.net",
-    credential=managed_identity_credential
+# Cosmos DB client (NoSQL / SQL API)
+cosmos_client = CosmosClient(url=COSMOS_URL, credential=COSMOS_KEY)
+database = cosmos_client.create_database_if_not_exists(DATABASE_NAME)
+container = database.create_container_if_not_exists(
+    id=CONTAINER_NAME,
+    partition_key=PartitionKey(path="/id")
 )
-blob_container_client = blob_service_client.get_container_client(container=BLOB_CONTAINER_NAME)
+
+# Create a ContainerClient from the container-level SAS URL
+blob_container_client = ContainerClient.from_container_url(BLOB_CONTAINER_SAS_URL)
 
 # ---------------- Restaurant Model ----------------
 class Restaurant:
