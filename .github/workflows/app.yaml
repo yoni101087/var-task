@@ -60,14 +60,10 @@ jobs:
         run: |
           # Echo API details
           echo "APIs..."
-          echo "POST /add_restaurant"
-          echo "GET /query_restaurant"
-          echo "GET /all_restaurants"
-          
-          # Get Public IP Address
-          echo "Getting Public IP Address..."
-          IP_ADDRESS=$(curl -s ifconfig.me)
-          echo "Public IP Address: $IP_ADDRESS"
+          echo "POST $IP_ADDRESS:5000/add_restaurant"
+          echo "GET $IP_ADDRESS:5000/query_restaurant"
+          echo "GET $IP_ADDRESS:5000/all_restaurants"
+
 
       - name: Push Docker image
         run: |
