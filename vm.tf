@@ -46,7 +46,12 @@
 
  }
  
- 
+# Retrieve the token from Azure Key Vault
+
+data "azurerm_key_vault_secret" "github_token" {
+  name         = "GITHUB-ACTIONS-TOKEN"
+  key_vault_id = data.azurerm_key_vault.main.id
+} 
 
 
 resource "azurerm_virtual_machine_extension" "vm-extension" {
@@ -58,7 +63,7 @@ resource "azurerm_virtual_machine_extension" "vm-extension" {
 
   settings = <<SETTINGS
 {
-  "commandToExecute": "sudo bash -c 'apt update && DEBIAN_FRONTEND=noninteractive apt install -y apt-transport-https python3-pip ca-certificates curl software-properties-common && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg && echo \"deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable\" > /etc/apt/sources.list.d/docker.list && apt update && DEBIAN_FRONTEND=noninteractive apt install -y docker-ce && usermod -aG docker testadmin'"
+  "commandToExecute": "sudo bash -c 'apt update && DEBIAN_FRONTEND=noninteractive apt install -y apt-transport-https python3-pip ca-certificates curl software-properties-common && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg && echo \"deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable\" > /etc/apt/sources.list.d/docker.list && apt update && DEBIAN_FRONTEND=noninteractive apt install -y docker-ce && usermod -aG docker testadmin' && mkdir actions-runner && cd actions-runner && curl -o actions-runner-linux-x64-2.321.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.321.0/actions-runner-linux-x64-2.321.0.tar.gz && tar xzf ./actions-runner-linux-x64-2.321.0.tar.gz && ./config.sh --url https://github.com/yoni101087/var-task --token --token ${data.azurerm_key_vault_secret.github_token.value} &&  ./run.sh"
 }
 SETTINGS
 }
