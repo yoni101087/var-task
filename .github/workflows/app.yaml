@@ -24,6 +24,25 @@ jobs:
           docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ env.REPO_NAME }}:${{ github.sha }} ./app
           docker tag ${{ secrets.DOCKER_USERNAME }}/${{ env.REPO_NAME }}:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/${{ env.REPO_NAME }}:latest
 
+      - name: Run Docker container
+        run: |
+          docker run -d -p 5000:5000 --name my_app ${{ secrets.DOCKER_USERNAME }}/${{ env.REPO_NAME }}:${{ github.sha }}
+
+      - name: Health check - Swagger endpoint
+        run: |
+          echo "Waiting for the app to be ready..."
+          for i in {1..10}; do
+            if curl --fail http://localhost:5000/swagger; then
+              echo "App is healthy!"
+              exit 0
+            else
+              echo "App is not ready yet. Retrying in 5 seconds..."
+              sleep 5
+            fi
+          done
+          echo "App failed to start. Exiting."
+          exit 1
+
       - name: Push Docker image
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/${{ env.REPO_NAME }}:${{ github.sha }}
