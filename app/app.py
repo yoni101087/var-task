@@ -118,7 +118,7 @@ def add_restaurant():
         response = requests.post(
             GITHUB_WEBHOOK_URL,
             headers={
-                "Authorization": f"Bearer {GITHUB_TOKEN}",
+                "Authorization": f"token {GITHUB_TOKEN}",
                 "Accept": "application/vnd.github.everest-preview+json"
             },
             json={
@@ -133,7 +133,7 @@ def add_restaurant():
         if response.status_code == 204:
             print("GitHub Action triggered successfully.")
         else:
-            print("Failed to trigger GitHub Action:", response.content)
+            print("Failed to trigger GitHub Action:", response.status_code, response.text)
 
         return jsonify({"message": "Restaurant added successfully"}), 201
 
