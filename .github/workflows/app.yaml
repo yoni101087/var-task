@@ -5,7 +5,8 @@ on:
     branches:
       - main  # Change to your preferred branch
   repository_dispatch:
-    types: [add_restaurant]
+    types:
+      - add_restaurant
 
 jobs:
   build-and-push:
